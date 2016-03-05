@@ -18,7 +18,8 @@ import br.com.quake.entity.GameEntity;
 import br.com.quake.entity.KillEntity;
 
 /**
- * Classe responsável por extrair os dados necessários para geração de informações dos jogos.
+ * Classe responsável por extrair os dados necessários para geração de
+ * informações dos jogos.
  * 
  * @author Lucas Santos
  *
@@ -27,29 +28,29 @@ import br.com.quake.entity.KillEntity;
 @Component
 public class LogParser {
 
+	private static final Logger LOGGER = LogManager.getLogger(LogParser.class);
+
 	@Value("${quake.log.gametag}")
 	private String quakeLogGameTag;
 	
 	@Value("${quake.log.killtag}")
 	private String quakeLogKillTag;
 	
-	private static final Logger LOGGER = LogManager.getLogger(LogParser.class);
-	
 	/**
 	 * Método responsável por realizar o parse do arquivo de game.log
 	 * 
 	 * @return Lista de jogos
 	 */
-	public List<GameEntity> parse(){
-		
+	public List<GameEntity> parse() {
+
 		LOGGER.info("Iniciando parse do arquivo de log.");
-		
-		List<GameEntity> listGames = new ArrayList<>();
-		
+
+		List<GameEntity> listGames = new ArrayList<GameEntity>();
+
 		try {
 			List<String> lines = this.getLogLies();
 			GameEntity game = null;
-			
+
 			int countId = 1;
 			for (String line : lines) {
 				if (line.contains(quakeLogGameTag)) {
@@ -63,72 +64,72 @@ public class LogParser {
 					}
 				}
 			}
-			
+
 		} catch (Exception e) {
 			LOGGER.error("Ocorreu um erro ao realizar o parse do arquivo de log.", e);
 		}
 		LOGGER.info("Fim do parse do arquivo de log.");
-		
+
 		return listGames;
 	}
-	
+
 	/**
 	 * Método responsável por retornar as linhas de confrontos
 	 * 
 	 * @param line
 	 * @return linha com players
 	 */
-	private String getKillLine(String line){
-			
+	private String getKillLine(String line) {
+
 		String regex = Pattern.quote(":") + "(.*?)" + Pattern.quote("by");
 		Pattern pattern = Pattern.compile(regex, Pattern.DOTALL);
-		
+
 		Matcher matcher = pattern.matcher(line);
-		
+
 		if (matcher.find()) {
 			line = matcher.group(0);
 		}
 		return line;
 	}
-	
+
 	/**
 	 * Método responsável por retornar os players em confronto de uma linha
 	 * 
 	 * @param line
 	 * @return Players
 	 */
-	private KillEntity getPlayersKillLine(String line){
-		
+	private KillEntity getPlayersKillLine(String line) {
+
 		KillEntity kill = null;
-		
+
 		String regex = Pattern.quote(":") + "(.*?)" + Pattern.quote(":") + "(.*?)" + Pattern.quote(":");
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(line);
-		
+
 		if (matcher.find()) {
 			String replaceText = matcher.group(0);
 			line = line.replace(replaceText, "").replace("by", "");
 			String[] splitUsers = line.split("killed");
-			
+
 			String userKiller = splitUsers[0].trim();
 			String userKilled = splitUsers[1].trim();
 			kill = new KillEntity(userKiller, userKilled);
 		}
 		return kill;
 	}
-	
+
 	/**
 	 * Método responsável por realizar a leitura do arquivo de log.
 	 * 
 	 * @return Lista de linhas do arquivo
 	 */
 	private List<String> getLogLies() {
-		
+
 		Stream<String> stream = new BufferedReader(
 				new InputStreamReader(ClassLoader.getSystemResourceAsStream("games.log"))).lines();
 
 		List<String> lines = stream.map(String::valueOf).collect(Collectors.toList());
-		
+
 		return lines;
 	}
 }

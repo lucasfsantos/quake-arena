@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="warn" strict="true"
+	monitorInterval="60">
+
+	<Properties>
+		<!-- Layout http://logging.apache.org/log4j/2.x/manual/layouts.html -->
+		<Property name="LOG_PATTERN">[%d{DEFAULT}] - %5p %c --- %m%n</Property>
+		<Property name="FILE">/data/services/logs/quake/app.log
+		</Property>
+		<Property name="FILE_ROLLING">/data/services/logs/quake/app-%d{dd}.log.gz
+		</Property>
+	</Properties>
+
+	<!-- Appenders: http://logging.apache.org/log4j/2.x/manual/appenders.html -->
+	<Appenders>
+		<Console name="CONSOLE">
+			<PatternLayout pattern="${LOG_PATTERN}" />
+		</Console>
+
+		<RollingFile name="APPLICATION" fileName="${FILE}"
+			filePattern="${FILE_ROLLING}">
+			<PatternLayout pattern="${LOG_PATTERN}" />
+
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1"
+					modulate="true" />
+			</Policies>
+			<DefaultRolloverStrategy max="20" />
+
+		</RollingFile>
+	</Appenders>
+
+	<Loggers>
+
+		<Logger name="org.springframework" level="WARN" additivity="false">
+			<AppenderRef ref="APPLICATION" />
+		</Logger>
+
+		<Logger name="org.hibernate" level="WARN" additivity="false">
+			<AppenderRef ref="APPLICATION" />
+		</Logger>
+
+		<Logger name="com.netflix" level="WARN" additivity="false">
+			<AppenderRef ref="APPLICATION" />
+		</Logger>
+
+		<Root level="info">
+			<AppenderRef ref="APPLICATION" />
+		</Root>
+	</Loggers>
+
+</Configuration>
