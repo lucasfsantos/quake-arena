@@ -16,7 +16,7 @@ import br.com.quake.entity.GameEntity;
 import br.com.quake.entity.KillEntity;
 
 /**
- * Teste da classe {@link LogParser}
+ * Teste da classe {@link GameLogParser}
  * 
  * @author Lucas
  *
@@ -28,13 +28,13 @@ import br.com.quake.entity.KillEntity;
 public class LogParserTest {
 
 	@Autowired
-	private LogParser logParser;
+	private GameLogParser logParser;
 
 	@Test
 	public void deveRealizarParseLog() {
 
 		// WHEN
-		List<GameEntity> listGames = logParser.parse();
+		List<GameEntity> listGames = logParser.findAll();
 
 		// THEN
 		assertNotNull(listGames);
@@ -47,7 +47,7 @@ public class LogParserTest {
 		long expectedGameCount = 21;
 
 		// WHEN
-		List<GameEntity> listGames = logParser.parse();
+		List<GameEntity> listGames = logParser.findAll();
 
 		// THEN
 		assertEquals(expectedGameCount, listGames.size());
@@ -57,7 +57,7 @@ public class LogParserTest {
 	public void deveValidarEstruturaRetorno(){
 		
 		// WHEN
-		List<GameEntity> listGames = logParser.parse();
+		List<GameEntity> listGames = logParser.findAll();
 		
 		// THEN
 		for (GameEntity game : listGames) {

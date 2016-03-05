@@ -3,8 +3,10 @@ package br.com.quake;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.web.ErrorMvcAutoConfiguration;
+import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.context.annotation.PropertySource;
 
 import io.swagger.annotations.Api;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -14,10 +16,10 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-@SpringBootApplication
-@EnableWebMvc
+@SpringBootApplication(exclude = {ErrorMvcAutoConfiguration.class})
+@PropertySource({"classpath:application.properties"})
 @EnableSwagger2
-public class ApplicationBoot {
+public class ApplicationBoot extends SpringBootServletInitializer {
 	/**
 	 * Main para inicialização do SpringBootServletInitializer.
 	 * @param args

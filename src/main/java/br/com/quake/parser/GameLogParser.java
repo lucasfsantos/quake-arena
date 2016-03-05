@@ -26,9 +26,9 @@ import br.com.quake.entity.KillEntity;
  * @version 1.0
  */
 @Component
-public class LogParser {
+public class GameLogParser {
 
-	private static final Logger LOGGER = LogManager.getLogger(LogParser.class);
+	private static final Logger LOGGER = LogManager.getLogger(GameLogParser.class);
 
 	@Value("${quake.log.gametag}")
 	private String quakeLogGameTag;
@@ -37,11 +37,20 @@ public class LogParser {
 	private String quakeLogKillTag;
 	
 	/**
+	 * Retorna todos os jogos do arquivo de log.
+	 *
+	 * @return Lista de jogos
+	 */
+	public List<GameEntity> findAll(){
+		return this.parse();
+	}
+	
+	/**
 	 * Método responsável por realizar o parse do arquivo de game.log
 	 * 
 	 * @return Lista de jogos
 	 */
-	public List<GameEntity> parse() {
+	private List<GameEntity> parse() {
 
 		LOGGER.info("Iniciando parse do arquivo de log.");
 
