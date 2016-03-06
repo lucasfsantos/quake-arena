@@ -36,14 +36,6 @@
 			<AppenderRef ref="APPLICATION" />
 		</Logger>
 
-		<Logger name="org.hibernate" level="WARN" additivity="false">
-			<AppenderRef ref="APPLICATION" />
-		</Logger>
-
-		<Logger name="com.netflix" level="WARN" additivity="false">
-			<AppenderRef ref="APPLICATION" />
-		</Logger>
-
 		<Root level="info">
 			<AppenderRef ref="APPLICATION" />
 		</Root>

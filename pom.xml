@@ -5,7 +5,7 @@
 	<groupId>br.com.quake</groupId>
 	<artifactId>quake-score-api</artifactId>
 	<version>0.0.1</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>quake-score-api</name>
 

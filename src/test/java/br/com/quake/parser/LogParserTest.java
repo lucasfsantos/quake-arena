@@ -16,7 +16,7 @@ import br.com.quake.entity.GameEntity;
 import br.com.quake.entity.KillEntity;
 
 /**
- * Teste da classe {@link GameLogParser}
+ * Testes da classe {@link GameLogParser}
  * 
  * @author Lucas
  *
