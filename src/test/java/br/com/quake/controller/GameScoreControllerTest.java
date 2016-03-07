@@ -25,9 +25,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import br.com.quake.service.GameScoreService;
 import br.com.quake.vo.GameScoreVO;
 
-//@RunWith(SpringJUnit4ClassRunner.class)
-//@SpringApplicationConfiguration(classes = ApplicationBoot.class)
-//@WebIntegrationTest({ "server.port:10100" })
 @RunWith(MockitoJUnitRunner.class)
 public class GameScoreControllerTest {
 
