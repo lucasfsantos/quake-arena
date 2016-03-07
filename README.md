@@ -2,7 +2,7 @@
 
 2 - Estrutura do Projeto:
 
-Para criação do projeto foi utilizado a plataforma Spring Boot.
+Para criação do projeto foi utilizado a plataforma Spring Boot com Java 8.
 
 O projeto contém os seguintes pacotes:
 
