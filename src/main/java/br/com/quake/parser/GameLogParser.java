@@ -1,6 +1,7 @@
 package br.com.quake.parser;
 
 import java.io.BufferedReader;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -134,8 +135,11 @@ public class GameLogParser {
 	 */
 	private List<String> getLogLies() {
 
+		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+		InputStream inputStream = classLoader.getResourceAsStream("games.log");
+		
 		Stream<String> stream = new BufferedReader(
-				new InputStreamReader(ClassLoader.getSystemResourceAsStream("games.log"))).lines();
+				new InputStreamReader(inputStream)).lines();
 
 		List<String> lines = stream.map(String::valueOf).collect(Collectors.toList());
 

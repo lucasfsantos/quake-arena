@@ -35,7 +35,7 @@
 		<Logger name="org.springframework" level="warn" additivity="false">
 			<AppenderRef ref="CONSOLE" />
 		</Logger>
-		
+
 		<Logger name="br.com.quake" level="info" additivity="false">
 			<AppenderRef ref="APPLICATION" />
 			<AppenderRef ref="CONSOLE" />
